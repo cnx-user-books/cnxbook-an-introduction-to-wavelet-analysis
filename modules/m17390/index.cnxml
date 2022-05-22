@@ -1,0 +1,260 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Approximation of Functions</title>
+  <metadata>
+  <md:content-id>m17390</md:content-id><md:title>Approximation of Functions</md:title>
+  <md:abstract/>
+  <md:uuid>bf6b63e2-2aca-43e9-96ff-fa02d237fbce</md:uuid>
+</metadata>
+
+<content>
+    
+    
+      <para id="id2253740">We first give a definition of the order of a multiresolution analysis.</para>
+      <note id="id2253744" type="Definition"><label>Definition</label>(Order of a MRA in the classical setting) 
+
+
+A multiresolution analysis is said to be of order <m:math><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:math>
+ if the primal scaling function <m:math><m:mi>ϕ</m:mi></m:math> reproduces polynomials up to degree <m:math><m:mrow><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>, i.e., 
+        <m:math mode="display">
+          <m:mrow>
+            <m:mtext>For</m:mtext>
+            <m:mspace width="1.em"/>
+            <m:mn>0</m:mn>
+            <m:mo>≤</m:mo>
+            <m:mi>p</m:mi>
+            <m:mo>&lt;</m:mo>
+            <m:mover accent="true">
+              <m:mi>N</m:mi>
+              <m:mo>˜</m:mo>
+            </m:mover>
+            <m:mo>,</m:mo>
+            <m:mspace width="0.277778em"/>
+            <m:mo>∃</m:mo>
+            <m:msub>
+              <m:mi>c</m:mi>
+              <m:mi>k</m:mi>
+            </m:msub>
+            <m:mo>∈</m:mo>
+            <m:mi mathvariant="double-struck">R</m:mi>
+            <m:mspace width="0.277778em"/>
+            <m:mtext>such</m:mtext>
+            <m:mspace width="4.pt"/>
+            <m:mtext>that</m:mtext>
+            <m:mspace width="4.pt"/>
+            <m:mspace width="0.277778em"/>
+            <m:msup>
+              <m:mi>x</m:mi>
+              <m:mi>p</m:mi>
+            </m:msup>
+            <m:mo>=</m:mo>
+            <m:munder>
+              <m:mo>∑</m:mo>
+              <m:mi>k</m:mi>
+            </m:munder>
+            <m:msub>
+              <m:mi>c</m:mi>
+              <m:mi>k</m:mi>
+            </m:msub>
+            <m:mi>ϕ</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>-</m:mo>
+              <m:mi>k</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </note>
+      
+      <para id="id2253062">The associated dual wavelet <m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> has then <m:math><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:math> vanishing
+ moments.
+In the classical setting, it is proved that the order of a MRA and the regularity of the scaling function are linked: the larger <m:math><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:math>, the higher the regularity of <m:math><m:mi>ϕ</m:mi></m:math>.
+Symmetrically to <link target-id="id2253744"/>, the order of the dual MRA is <m:math><m:mi>N</m:mi></m:math> if <m:math><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover></m:math> can reproduce polynomials up to degree <m:math><m:mrow><m:mi>N</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>.
+<link document="m17394" target-id="uid33">Figure 2 from Multiresolution analysis and wavelets</link> shows an example of a biorthogonal basis where <m:math><m:mrow><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover><m:mo>=</m:mo><m:mn>3</m:mn></m:mrow></m:math> and <m:math><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>. It illustrates the link between
+a high number of vanishing moments of the
+dual wavelet <m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> and the regularity of the
+primal scaling function <m:math><m:mi>ϕ</m:mi></m:math>.</para>
+      <para id="id2254343">The main objective when decomposing a function in a wavelet series is to create a sparse  representation of the function, that is, to obtain a decomposition where only a few number of detail coefficients are `large', while the majority of the coefficients are close to zero. By `large', we mean that the absolute value of the detail coefficient is large.</para>
+      <para id="id2254356">Near a singularity, large detail coefficients at different levels will be needed to recover the discontinuity. However, between points of singularity, we can hope to have small detail coefficients, in particular if the analyzing wavelets <m:math><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> have a large number <m:math><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:math> of vanishing  moments.
+Indeed, suppose the function <m:math><m:mi>f</m:mi></m:math> to be decomposed is analytic on the interval <m:math><m:mi>I</m:mi></m:math> without discontinuity. Since <m:math><m:mrow><m:mfenced separators="" open="〈" close="〉"><m:msup><m:mi>x</m:mi><m:mi>p</m:mi></m:msup><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced><m:mo>=</m:mo><m:mn>0</m:mn></m:mrow></m:math> for <m:math><m:mrow><m:mi>p</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>, we are sure that the first <m:math><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:math> terms of a Taylor expansion of <m:math><m:mi>f</m:mi></m:math> will not give a contribution to the wavelet coefficient <m:math><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced></m:math> provided that the support of <m:math><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> does not contain any singularities of the function <m:math><m:mi>f</m:mi></m:math>.</para>
+      <para id="id2254606">This sparse representation explains why classical wavelets provide
+smoothness characterization of function spaces like the Hölder and Sobolev
+spaces <link target-id="bid0"/>, but also of more general Besov spaces,
+which may contain functions of inhomogeneous
+regularity <link target-id="bid1"/>, <link target-id="bid2"/>, <link target-id="bid3"/>, <link target-id="bid4"/>, <link target-id="bid5"/>.</para>
+      <para id="id2254649">We illustrate this characterization property with the case of <m:math><m:mrow><m:mi>β</m:mi><m:mo>-</m:mo></m:mrow></m:math>Hölder functions.</para>
+      
+      <para id="element-525"><title>Definition 2</title>The class <m:math><m:mrow><m:msup><m:mi>Λ</m:mi><m:mi>β</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>L</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> of Hölder continuous functions is defined as follows:
+
+<list id="list-235256" list-type="enumerated">
+
+        <item id="uid45643">if <m:math><m:mrow><m:mi>β</m:mi><m:mo>≤</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:msup><m:mi>Λ</m:mi><m:mi>β</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>L</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfenced separators="" open="{" close="}"><m:mrow><m:mi>f</m:mi><m:mo>:</m:mo><m:mfenced separators="" open="|" close="|"><m:mi>f</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo><m:mo>-</m:mo><m:mi>f</m:mi><m:mo>(</m:mo><m:mi>y</m:mi><m:mo>)</m:mo></m:mfenced><m:mo>≤</m:mo><m:mi>L</m:mi><m:msup><m:mrow><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>y</m:mi><m:mo>|</m:mo></m:mrow><m:mi>β</m:mi></m:msup></m:mrow></m:mfenced></m:mrow></m:math></item>
+        <item id="uid4356">if <m:math><m:mrow><m:mi>β</m:mi><m:mo>&gt;</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:msup><m:mi>Λ</m:mi><m:mi>β</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>L</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfenced separators="" open="{" close="}"><m:mi>f</m:mi><m:mo>:</m:mo><m:mfenced separators="" open="|" close="|"><m:msup><m:mi>f</m:mi><m:mfenced separators="" open="(" close=")"><m:mrow><m:mo>⌊</m:mo><m:mi>β</m:mi><m:mo>⌋</m:mo></m:mrow></m:mfenced></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>-</m:mo><m:msup><m:mi>f</m:mi><m:mfenced separators="" open="(" close=")"><m:mrow><m:mo>⌊</m:mo><m:mi>β</m:mi><m:mo>⌋</m:mo></m:mrow></m:mfenced></m:msup><m:mrow><m:mo>(</m:mo><m:mi>y</m:mi><m:mo>)</m:mo></m:mrow></m:mfenced><m:mo>≤</m:mo><m:msup><m:mrow><m:mi>L</m:mi><m:mo>|</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>y</m:mi><m:mo>|</m:mo></m:mrow><m:msup><m:mi>β</m:mi><m:mo>'</m:mo></m:msup></m:msup><m:mspace width="0.277778em"/><m:mo>;</m:mo><m:mrow><m:mo>|</m:mo><m:msup><m:mi>f</m:mi><m:mfenced separators="" open="(" close=")"><m:mrow><m:mo>⌊</m:mo><m:mi>β</m:mi><m:mo>⌋</m:mo></m:mrow></m:mfenced></m:msup><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>|</m:mo></m:mrow><m:mo>≤</m:mo><m:mi>M</m:mi></m:mfenced><m:mo>,</m:mo></m:mrow></m:math>
+
+
+
+where <m:math><m:mrow><m:mo>⌊</m:mo><m:mi>β</m:mi><m:mo>⌋</m:mo></m:mrow></m:math> is the largest integer less than <m:math><m:mi>β</m:mi></m:math> and <m:math><m:mrow><m:msup><m:mi>β</m:mi><m:mo>'</m:mo></m:msup><m:mo>=</m:mo><m:mi>β</m:mi><m:mo>-</m:mo><m:mrow><m:mo>⌊</m:mo><m:mi>β</m:mi><m:mo>⌋</m:mo></m:mrow><m:mo>.</m:mo></m:mrow></m:math></item>
+</list></para>
+      <para id="id2255072">The global Hölder regularity of a function can be characterized as
+follows <link target-id="bid6"/>, <link target-id="bid0"/>.</para>
+      <note id="id2255088" type="Theorem"><label>Theorem</label> 
+Let <m:math><m:mrow><m:mi>f</m:mi><m:mo>∈</m:mo><m:msup><m:mi>Λ</m:mi><m:mi>β</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>L</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, and suppose that the (orthogonal) wavelet function <m:math><m:mi>ψ</m:mi></m:math> has <m:math><m:mi>r</m:mi></m:math> continuous derivatives and <m:math><m:mi>r</m:mi></m:math> vanishing moments with <m:math><m:mrow><m:mi>r</m:mi><m:mo>&gt;</m:mo><m:mi>β</m:mi></m:mrow></m:math>. Then</note>
+      <equation id="id2255168">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="|" close="|">
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:msub>
+                  <m:mi>ψ</m:mi>
+                  <m:mrow>
+                    <m:mi>j</m:mi>
+                    <m:mi>k</m:mi>
+                  </m:mrow>
+                </m:msub>
+              </m:mfenced>
+            </m:mfenced>
+            <m:mo>≤</m:mo>
+            <m:mi>C</m:mi>
+            <m:msup>
+              <m:mn>2</m:mn>
+              <m:mrow>
+                <m:mo>-</m:mo>
+                <m:mi>j</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>β</m:mi>
+                <m:mo>+</m:mo>
+                <m:mn>1</m:mn>
+                <m:mo>/</m:mo>
+                <m:mn>2</m:mn>
+                <m:mo>)</m:mo>
+              </m:mrow>
+            </m:msup>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2255248">A similar characterization exists for continuous and Sobolev functions <link target-id="bid0"/>, <link target-id="bid1"/>.</para>
+      <para id="id2255264">In the orthogonal setting, the wavelet <m:math><m:mi>ψ</m:mi></m:math> must be regular <emphasis>and</emphasis> have a high number of vanishing moments.
+On the contrary,
+in the biorthogonal expansion <link document="m17394" target-id="uid31"> equation 5 from Multiresolution analysis and wavelets</link><!--equation 5-->, it is mostly of interest to have a dual wavelet <m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> with a high number of vanishing moments, and hence a regular primal scaling and wavelet functions.
+On the primal side, it is sufficient to have only one vanishing moment for wavelet denoising, and consequently <m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> may not be very regular.
+In this case, the wavelet coefficient <m:math><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced></m:math> with the less regular wavelet <m:math><m:msub><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> can be used to characterize <m:math><m:mrow><m:mi>f</m:mi><m:mo>∈</m:mo><m:msup><m:mi>Λ</m:mi><m:mi>β</m:mi></m:msup><m:mrow><m:mo>(</m:mo><m:mi>L</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> with <m:math><m:mrow><m:mn>0</m:mn><m:mo>&lt;</m:mo><m:mi>β</m:mi><m:mo>&lt;</m:mo><m:mover accent="true"><m:mi>N</m:mi><m:mo>˜</m:mo></m:mover></m:mrow></m:math>, even if <m:math><m:mrow><m:mi>β</m:mi><m:mo>&gt;</m:mo><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>: with a biorthogonal basis, regular functions can be characterized by their inner products with much less regular functions.</para>
+
+  </content>
+  <bib:file>
+    <bib:entry id="bid6">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Cai, T. and Brown, L.D.</bib:author>
+        <bib:title>Wavelet Shrinkage for nonequispaced samples.</bib:title>
+        <bib:journal>Annals of Statistics</bib:journal>
+        <bib:year>1998</bib:year>
+<!--optional fields-->
+        <bib:volume>26</bib:volume>
+        <bib:number>5</bib:number>
+        <bib:pages>1783-1799</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Daubechies, I.</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:article>
+<!--required fields-->
+        <bib:author>DeVore, R.A. and Jawerth, B.B. and Popov, V.</bib:author>
+        <bib:title>Compression of wavelet decomposition</bib:title>
+        <bib:journal>Amer. J. Math</bib:journal>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:volume>114</bib:volume>
+        <bib:number/>
+        <bib:pages>737-785</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid3">
+      <bib:techreport>
+<!--required fields-->
+        <bib:author>Donoho, D.L.</bib:author>
+        <bib:title>Interpolating wavelets</bib:title>
+        <bib:institution>Department of Statistics, Stanford University</bib:institution>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:type>Preprint</bib:type>
+        <bib:number/>
+        <bib:address/>
+        <bib:month/>
+        <bib:note/>
+      </bib:techreport>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Donoho, D.L.</bib:author>
+        <bib:title>De-noising via soft-thresholding</bib:title>
+        <bib:journal>IEEE Transactions on Information Theory</bib:journal>
+        <bib:year>1995</bib:year>
+<!--optional fields-->
+        <bib:volume>41</bib:volume>
+        <bib:number/>
+        <bib:pages>613-627</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid5">
+      <bib:article>
+<!--required fields-->
+        <bib:author>DeVore, R.A. and Popov, V.</bib:author>
+        <bib:title>Interpolation of Besov spaces</bib:title>
+        <bib:journal>Trans. Amer. Math. Soc.</bib:journal>
+        <bib:year>1988</bib:year>
+<!--optional fields-->
+        <bib:volume>305</bib:volume>
+        <bib:number/>
+        <bib:pages>397-414</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Härdle, W. and Kerkyacharian, G. and Picard, D. and Tsybakov, A.</bib:author>
+        <bib:title>Wavelets, Approximation, and Statistical Applications</bib:title>
+        <bib:publisher>Springer-Verlag</bib:publisher>
+        <bib:year>1998</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series>Lecture Notes in Statistics 129</bib:series>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

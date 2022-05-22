@@ -1,0 +1,1169 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Fast wavelet transform</title>
+  <metadata>
+  <md:content-id>m17391</md:content-id><md:title>Fast wavelet transform</md:title>
+  <md:abstract/>
+  <md:uuid>37b0c746-ce15-4fcf-a617-3d1cf147f335</md:uuid>
+</metadata>
+
+<content>
+    
+    
+      <section id="uid1">
+        <title>One-dimensional wavelet transform</title>
+        <para id="id2253747">Suppose we are given as signal the projection  of a function onto the space <m:math><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:math>:</para>
+        <equation id="id2253774">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi mathvariant="script">P</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mi>f</m:mi>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:msub>
+                <m:mi>ϕ</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>,</m:mo>
+              <m:mspace width="1.em"/>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:msub>
+                  <m:mover accent="true">
+                    <m:mi>ϕ</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mrow>
+                    <m:mi>j</m:mi>
+                    <m:mo>+</m:mo>
+                    <m:mn>1</m:mn>
+                    <m:mo>,</m:mo>
+                    <m:mi>k</m:mi>
+                  </m:mrow>
+                </m:msub>
+              </m:mfenced>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2254164">Using the dual refinement equations, we have:</para>
+        <equation id="uid2">
+          <m:math mode="display">
+            <m:mtable displaystyle="true">
+              <m:mtr>
+                <m:mtd columnalign="right">
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mo>=</m:mo>
+                    <m:mfenced separators="" open="〈" close="〉">
+                      <m:mi>f</m:mi>
+                      <m:mspace width="0.166667em"/>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mover accent="true">
+                          <m:mi>ϕ</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mfenced>
+                  </m:mrow>
+                </m:mtd>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mfenced separators="" open="〈" close="〉">
+                    <m:mi>f</m:mi>
+                    <m:mspace width="0.166667em"/>
+                    <m:mo>,</m:mo>
+                    <m:mrow>
+                      <m:munder>
+                        <m:mo>∑</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:munder>
+                      <m:msub>
+                        <m:mover accent="true">
+                          <m:mi>h</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mi>l</m:mi>
+                      </m:msub>
+                      <m:msub>
+                        <m:mi>ϕ</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                          <m:mo>,</m:mo>
+                          <m:mn>2</m:mn>
+                          <m:mi>k</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mi>l</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mrow>
+                  </m:mfenced>
+                </m:mtd>
+              </m:mtr>
+              <m:mtr>
+                <m:mtd/>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mover accent="true">
+                        <m:mi>h</m:mi>
+                        <m:mo>˜</m:mo>
+                      </m:mover>
+                      <m:mrow>
+                        <m:mi>l</m:mi>
+                        <m:mo>-</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mspace width="3.33333pt"/>
+                    <m:mo>,</m:mo>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+            </m:mtable>
+          </m:math>
+        </equation>
+        <para id="id2254367">where the coefficients <m:math><m:msub><m:mi>s</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> are called <emphasis>scaling coefficients</emphasis>,  since they are related to scaling functions.
+Similarly, the <emphasis>wavelet</emphasis> or <emphasis>detail coefficients</emphasis><m:math><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math>
+ are obtained as</para>
+        <equation id="uid3">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>d</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:msub>
+                  <m:mover accent="true">
+                    <m:mi>ψ</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mrow>
+                    <m:mi>j</m:mi>
+                    <m:mi>k</m:mi>
+                  </m:mrow>
+                </m:msub>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mover accent="true">
+                  <m:mi>g</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mrow>
+                  <m:mi>l</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>2</m:mn>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>l</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2254533">The coefficients <m:math><m:msub><m:mi>s</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> and <m:math><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> are obtained from <m:math><m:msub><m:mi>s</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mi>l</m:mi></m:mrow></m:msub></m:math> by `moving average' schemes, using the filter coefficients <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>˜</m:mo></m:mover><m:mi>l</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> and <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mover accent="true"><m:mi>g</m:mi><m:mo>˜</m:mo></m:mover><m:mi>l</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> as `weights', with the exception that these moving averages are sampled only at the even integers, i.e. a downsampling is performed. 
+Such transform allows, once we have computed <m:math><m:msub><m:mi>s</m:mi><m:mrow><m:mi>J</m:mi><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:math><m:math><m:mrow><m:mo>=</m:mo><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>J</m:mi><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced></m:mrow></m:math>
+for a fine level <m:math><m:mrow><m:mi>J</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">N</m:mi></m:mrow></m:math>, to compute <m:math><m:msub><m:mi>s</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> and <m:math><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> for all coarser levels <m:math><m:mrow><m:mi>j</m:mi><m:mo>&lt;</m:mo><m:mi>J</m:mi></m:mrow></m:math> without evaluating the integrals.</para>
+        <para id="id2254780">Suppose now we are given the values of <m:math><m:mi>f</m:mi></m:math> at <m:math><m:mrow><m:mi>n</m:mi><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mi>J</m:mi></m:msup></m:mrow></m:math> equispaced design points. The scaling functions <m:math><m:mrow><m:msub><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>J</m:mi><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub><m:mo>,</m:mo><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:msup><m:mn>2</m:mn><m:mi>J</m:mi></m:msup><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>, are compactly supported and localized
+around <m:math><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mi>J</m:mi></m:mrow></m:msup><m:mi>k</m:mi></m:mrow></m:math>. Hence the coefficients <m:math><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>J</m:mi><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced></m:math> are weighted and
+scaled average of <m:math><m:mi>f</m:mi></m:math> on a neighborhood of <m:math><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mi>J</m:mi></m:mrow></m:msup><m:mi>k</m:mi></m:mrow></m:math> which becomes smaller as <m:math><m:mi>J</m:mi></m:math> tends to infinity. Consequently, it makes sense to replace the integral <m:math><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:msub><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover><m:mrow><m:mi>J</m:mi><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub></m:mfenced></m:math> by the (scaled) value of <m:math><m:mi>f</m:mi></m:math> at <m:math><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mi>J</m:mi></m:mrow></m:msup><m:mi>k</m:mi></m:mrow></m:math>.
+More complicate quadrature formulae have been developed
+in <link target-id="bid0"/>, <link target-id="bid1"/>, <link target-id="bid2"/>.</para>
+        <para id="id2255055">With <m:math><m:mrow><m:msub><m:mi>s</m:mi><m:mi>j</m:mi></m:msub><m:mo>:</m:mo><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo><m:msub><m:mi>s</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mo>;</m:mo><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>}</m:mo></m:mrow></m:mrow></m:math> and <m:math><m:mrow><m:msub><m:mi>d</m:mi><m:mi>j</m:mi></m:msub><m:mo>:</m:mo><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mo>;</m:mo><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>}</m:mo></m:mrow></m:mrow></m:math>, the forward (or analyzing) wavelet transform given 
+by <link target-id="uid2"/>-<link target-id="uid3"/>
+can be rewritten as</para>
+        <equation id="uid5">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msubsup>
+                <m:mover accent="true">
+                  <m:mi>H</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mi>j</m:mi>
+                <m:mo>*</m:mo>
+              </m:msubsup>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="1.em"/>
+              <m:mtext>and</m:mtext>
+              <m:mspace width="1.em"/>
+              <m:msub>
+                <m:mi>d</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msubsup>
+                <m:mover accent="true">
+                  <m:mi>G</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mi>j</m:mi>
+                <m:mo>*</m:mo>
+              </m:msubsup>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>,</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255301">where <m:math><m:msubsup><m:mover accent="true"><m:mi>H</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi><m:mo>*</m:mo></m:msubsup></m:math> denotes the Hermitian conjugate of <m:math><m:msub><m:mover accent="true"><m:mi>H</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi></m:msub></m:math>.</para>
+        <para id="id2255351">The inverse (or synthesis) transform  is found by using the primal refinement equations and the fact that <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>=</m:mo><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>⊕</m:mo><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:mrow></m:math>.</para>
+        <equation id="uid7">
+          <m:math mode="display">
+            <m:mtable displaystyle="true">
+              <m:mtr>
+                <m:mtd columnalign="right">
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi mathvariant="script">P</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mi>f</m:mi>
+                  </m:mrow>
+                </m:mtd>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>l</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mo>=</m:mo>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mo>+</m:mo>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>d</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>ψ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+              <m:mtr>
+                <m:mtd/>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>l</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>h</m:mi>
+                      <m:mi>l</m:mi>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mi>k</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mo>+</m:mo>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>d</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>l</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>g</m:mi>
+                      <m:mi>l</m:mi>
+                    </m:msub>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mi>k</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+              <m:mtr>
+                <m:mtd/>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>l</m:mi>
+                    </m:munder>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mi>l</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mfenced separators="" open="(" close=")">
+                      <m:mrow>
+                        <m:munder>
+                          <m:mo>∑</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:munder>
+                        <m:msub>
+                          <m:mi>h</m:mi>
+                          <m:mrow>
+                            <m:mi>l</m:mi>
+                            <m:mo>-</m:mo>
+                            <m:mn>2</m:mn>
+                            <m:mi>k</m:mi>
+                          </m:mrow>
+                        </m:msub>
+                        <m:msub>
+                          <m:mi>s</m:mi>
+                          <m:mrow>
+                            <m:mi>j</m:mi>
+                            <m:mo>,</m:mo>
+                            <m:mi>k</m:mi>
+                          </m:mrow>
+                        </m:msub>
+                        <m:mo>+</m:mo>
+                        <m:munder>
+                          <m:mo>∑</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:munder>
+                        <m:msub>
+                          <m:mi>g</m:mi>
+                          <m:mrow>
+                            <m:mi>l</m:mi>
+                            <m:mo>-</m:mo>
+                            <m:mn>2</m:mn>
+                            <m:mi>k</m:mi>
+                          </m:mrow>
+                        </m:msub>
+                        <m:msub>
+                          <m:mi>d</m:mi>
+                          <m:mrow>
+                            <m:mi>j</m:mi>
+                            <m:mi>k</m:mi>
+                          </m:mrow>
+                        </m:msub>
+                      </m:mrow>
+                    </m:mfenced>
+                    <m:mspace width="3.33333pt"/>
+                    <m:mo>,</m:mo>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+            </m:mtable>
+          </m:math>
+        </equation>
+        <para id="id2255806">from which it follows that</para>
+        <equation id="id2255812">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>l</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mi>h</m:mi>
+                <m:mrow>
+                  <m:mi>l</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>2</m:mn>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mo>+</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mi>g</m:mi>
+                <m:mrow>
+                  <m:mi>l</m:mi>
+                  <m:mo>-</m:mo>
+                  <m:mn>2</m:mn>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:msub>
+                <m:mi>d</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255917">In matrix form, we have</para>
+        <equation id="uid8">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msub>
+                <m:mi>H</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:msub>
+                <m:mi>s</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mo>+</m:mo>
+              <m:msub>
+                <m:mi>G</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:msub>
+                <m:mi>d</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255987">In the finite and classical setting, the matrices <m:math><m:msub><m:mi>H</m:mi><m:mi>j</m:mi></m:msub></m:math>, <m:math><m:msub><m:mi>G</m:mi><m:mi>j</m:mi></m:msub></m:math>, <m:math><m:msub><m:mover accent="true"><m:mi>H</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi></m:msub></m:math>
+and <m:math><m:msub><m:mover accent="true"><m:mi>G</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi></m:msub></m:math> are of size <m:math><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msup><m:mo>×</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup></m:mrow></m:math>. Moreover, if the basis functions are compactly supported, the four filters (<m:math><m:msub><m:mi>h</m:mi><m:mi>l</m:mi></m:msub></m:math>, <m:math><m:msub><m:mi>g</m:mi><m:mi>l</m:mi></m:msub></m:math>, <m:math><m:msub><m:mover accent="true"><m:mi>h</m:mi><m:mo>˜</m:mo></m:mover><m:mi>l</m:mi></m:msub></m:math>, <m:math><m:msub><m:mover accent="true"><m:mi>g</m:mi><m:mo>˜</m:mo></m:mover><m:mi>l</m:mi></m:msub></m:math>) have only a finite number of nonzero elements, and hence all these matrices are banded.</para>
+        <section id="uid9">
+          <title>Example: Haar wavelet transform</title>
+          <para id="id2256175">In case of the orthogonal Haar  transform, <m:math><m:mrow><m:msubsup><m:mover accent="true"><m:mi>H</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi><m:mo>*</m:mo></m:msubsup><m:mo>=</m:mo><m:msubsup><m:mi>H</m:mi><m:mi>j</m:mi><m:mo>*</m:mo></m:msubsup></m:mrow></m:math> and is of the form</para>
+          <equation id="id2256222">
+            <m:math mode="display">
+              <m:mtable displaystyle="true">
+                <m:mtr>
+                  <m:mtd>
+                    <m:mrow>
+                      <m:msubsup>
+                        <m:mover accent="true">
+                          <m:mi>H</m:mi>
+                          <m:mo>˜</m:mo>
+                        </m:mover>
+                        <m:mi>j</m:mi>
+                        <m:mo>*</m:mo>
+                      </m:msubsup>
+                      <m:mo>=</m:mo>
+                      <m:mfenced open="[" close="]">
+                        <m:mtable>
+                          <m:mtr>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>0</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>1</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                          </m:mtr>
+                          <m:mtr>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>0</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>1</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                          </m:mtr>
+                          <m:mtr>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd>
+                              <m:mo>...</m:mo>
+                            </m:mtd>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                          </m:mtr>
+                          <m:mtr>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd/>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>0</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                            <m:mtd>
+                              <m:msub>
+                                <m:mi>h</m:mi>
+                                <m:mn>1</m:mn>
+                              </m:msub>
+                            </m:mtd>
+                          </m:mtr>
+                        </m:mtable>
+                      </m:mfenced>
+                    </m:mrow>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:math>
+          </equation>
+          <para id="id2256349">since only <m:math><m:msub><m:mi>h</m:mi><m:mn>0</m:mn></m:msub></m:math> and <m:math><m:msub><m:mi>h</m:mi><m:mn>1</m:mn></m:msub></m:math> are different from zero : <m:math><m:mrow><m:msub><m:mi>h</m:mi><m:mn>0</m:mn></m:msub><m:mo>=</m:mo><m:msub><m:mi>h</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:msqrt><m:mn>2</m:mn></m:msqrt></m:mrow></m:math>.
+The high-pass filter <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>g</m:mi><m:mi>l</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> is such that <m:math><m:mrow><m:msub><m:mi>g</m:mi><m:mn>0</m:mn></m:msub><m:mo>=</m:mo><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:msqrt><m:mn>2</m:mn></m:msqrt></m:mrow></m:math>
+and <m:math><m:mrow><m:msub><m:mi>g</m:mi><m:mn>1</m:mn></m:msub><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>/</m:mo><m:msqrt><m:mn>2</m:mn></m:msqrt></m:mrow></m:math>. The forward transform <link target-id="uid2"/>-<link target-id="uid3"/>
+reduces to</para>
+          <equation id="id2256502">
+            <m:math mode="display">
+              <m:mtable displaystyle="true">
+                <m:mtr>
+                  <m:mtd columnalign="right">
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>=</m:mo>
+                  </m:mtd>
+                  <m:mtd columnalign="left">
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                          <m:mo>,</m:mo>
+                          <m:mn>2</m:mn>
+                          <m:mi>k</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>+</m:mo>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                          <m:mo>,</m:mo>
+                          <m:mn>2</m:mn>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mrow>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd columnalign="right">
+                    <m:msub>
+                      <m:mi>d</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>=</m:mo>
+                  </m:mtd>
+                  <m:mtd columnalign="left">
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                          <m:mo>,</m:mo>
+                          <m:mn>2</m:mn>
+                          <m:mi>k</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>-</m:mo>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>+</m:mo>
+                          <m:mn>1</m:mn>
+                          <m:mo>,</m:mo>
+                          <m:mn>2</m:mn>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mspace width="3.33333pt"/>
+                      <m:mo>,</m:mo>
+                    </m:mrow>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:math>
+          </equation>
+          <para id="id2256689">and the reconstruction is given by</para>
+          <equation id="id2256695">
+            <m:math mode="display">
+              <m:mtable displaystyle="true">
+                <m:mtr>
+                  <m:mtd columnalign="right">
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>=</m:mo>
+                  </m:mtd>
+                  <m:mtd columnalign="left">
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>-</m:mo>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>d</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mrow>
+                  </m:mtd>
+                </m:mtr>
+                <m:mtr>
+                  <m:mtd columnalign="right">
+                    <m:msub>
+                      <m:mi>s</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>,</m:mo>
+                        <m:mn>2</m:mn>
+                        <m:mi>k</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mtd>
+                  <m:mtd>
+                    <m:mo>=</m:mo>
+                  </m:mtd>
+                  <m:mtd columnalign="left">
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>s</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mo>+</m:mo>
+                      <m:mfrac>
+                        <m:mn>1</m:mn>
+                        <m:msqrt>
+                          <m:mn>2</m:mn>
+                        </m:msqrt>
+                      </m:mfrac>
+                      <m:msub>
+                        <m:mi>d</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                      <m:mspace width="3.33333pt"/>
+                      <m:mo>.</m:mo>
+                    </m:mrow>
+                  </m:mtd>
+                </m:mtr>
+              </m:mtable>
+            </m:math>
+          </equation>
+        </section>
+      </section>
+      <section id="uid11">
+        <title>Two-dimensional wavelet transform</title>
+        <para id="id2256873">The wavelet transform has been successfully applied to compress images, which are modelled as functions defined on a regular two-dimensional grid.</para>
+        <figure id="uid12" orient="horizontal">
+          <media id="id1166824378773" alt=""><image src="../../media/image1-53d3.png" mime-type="image/png" width="787"/><image for="pdf" src="../../media/image1.eps" mime-type="application/postscript" print-width="12.0cm"/></media>
+          <caption>Two-dimensional wavelet transform: first the filters are applied on the column of the matrix <m:math><m:msub><m:mi>S</m:mi><m:mi>J</m:mi></m:msub></m:math>, this produces two matrices. The filters are applied a second time on the columns of these two matrices, resulting in four elements: a matrix of scaling coefficients, and three detail matrices.</caption>
+        </figure>
+        <para id="id2256911">The easiest way to build a two-dimensional MRA is probably to use tensor products of spaces, see <link target-id="bid3"/>, <link target-id="bid4"/>. In terms of wavelet transforms, this leads to applying two times a one-dimensional transform: first on the `row' of the signal matrix <m:math><m:msub><m:mi>S</m:mi><m:mi>J</m:mi></m:msub></m:math>, and second on the `columns' of the resulting two matrices, see <link target-id="uid12"/>. In this figure, we see that,
+at each level of the decomposition, three types of detail coefficients are produced: <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>h</m:mi></m:msubsup></m:math>, <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>v</m:mi></m:msubsup></m:math> and <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>d</m:mi></m:msubsup></m:math>.
+These superscripts recall that, in an image, <emphasis>horizontal</emphasis> edges will lead to large values of <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>h</m:mi></m:msubsup></m:math>, <emphasis>vertical</emphasis> edges will show up in <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>v</m:mi></m:msubsup></m:math> and <m:math><m:msubsup><m:mi>D</m:mi><m:mi>j</m:mi><m:mi>d</m:mi></m:msubsup></m:math> will be sensitive to <emphasis>diagonal</emphasis> lines.</para>
+        <para id="id2257078">However, such a transform is not able to compress efficiently an image that contains curves.
+More complex bidimensional bases are now proposed in the literature to better model discontinuities along curves, see for
+example <link target-id="bid5"/>, <link target-id="bid6"/>, <link target-id="bid7"/>, <link target-id="bid8"/>.</para>
+      </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid5">
+      <bib:techreport>
+<!--required fields-->
+        <bib:author>Candès, E.J.</bib:author>
+        <bib:title>Ridgelets: Estimating with Ridge Functions.</bib:title>
+        <bib:institution>Department of Statistics, Stanford University</bib:institution>
+        <bib:year>1999</bib:year>
+<!--optional fields-->
+        <bib:type>Technical report</bib:type>
+        <bib:number/>
+        <bib:address/>
+        <bib:month/>
+        <bib:note/>
+      </bib:techreport>
+    </bib:entry>
+    <bib:entry id="bid3">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Daubechies, I.</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid6">
+      <bib:inproceedings>
+<!--required fields-->
+        <bib:author>Jansen, M. and Choi, H. and Lavu, S. and Baraniuk, R.</bib:author>
+        <bib:title>Multiscale Image Processing Using Normal Triangulated Meshes</bib:title>
+        <bib:booktitle/>
+        <bib:year>2001</bib:year>
+<!--optional fields-->
+        <bib:editor/>
+        <bib:number/>
+        <bib:series/>
+        <bib:pages/>
+        <bib:address/>
+        <bib:month/>
+        <bib:organization>IEEE International Conference on Image Processing</bib:organization>
+        <bib:publisher/>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid4">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Mallat, S.</bib:author>
+        <bib:title>A Wavelet Tour of Signal Processing</bib:title>
+        <bib:publisher>Academic Press</bib:publisher>
+        <bib:year>1998</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address/>
+        <bib:edition>Second</bib:edition>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid7">
+      <bib:unpublished>
+<!--required fields-->
+        <bib:author>Starck, J. L. and Candès, E. J. and Donoho, D. L.</bib:author>
+        <bib:title>The Curvelet Transform for Image Denoising</bib:title>
+        <bib:note>To appear in IEEE Transactions on Signal Processing</bib:note>
+<!--optional fields-->
+        <bib:month/>
+        <bib:year>2002</bib:year>
+      </bib:unpublished>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:inproceedings>
+<!--required fields-->
+        <bib:author>Sweldens, W. and Piessens, R.</bib:author>
+        <bib:title>Wavelet Sampling Techniques</bib:title>
+        <bib:booktitle>1993 Proceedings of the Statistical Computing Section</bib:booktitle>
+        <bib:year>1993</bib:year>
+<!--optional fields-->
+        <bib:editor/>
+        <bib:number/>
+        <bib:series/>
+        <bib:pages>20-29</bib:pages>
+        <bib:address/>
+        <bib:month/>
+        <bib:organization/>
+        <bib:publisher>American Statistical Association</bib:publisher>
+        <bib:note/>
+      </bib:inproceedings>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Sweldens, W. and Piessens, R.</bib:author>
+        <bib:title>Quadrature Formulae and Asymptotic Error Expansions for wavelet approximations of smooth functions</bib:title>
+        <bib:journal>SIAM J. Numer. Anal.</bib:journal>
+        <bib:year>1994</bib:year>
+<!--optional fields-->
+        <bib:volume>31</bib:volume>
+        <bib:number>4</bib:number>
+        <bib:pages>1240-1264</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:phdthesis>
+<!--required fields-->
+        <bib:author>Sweldens, W.</bib:author>
+        <bib:title>Construction and Applications of Wavelets in Numerical Analysis</bib:title>
+        <bib:school>Department of Computer Science, Katholieke Universiteit Leuven, Belgium</bib:school>
+        <bib:year>1994</bib:year>
+<!--optional fields-->
+        <bib:type>Ph. D. Thesis</bib:type>
+        <bib:address/>
+        <bib:month/>
+        <bib:note/>
+      </bib:phdthesis>
+    </bib:entry>
+    <bib:entry id="bid8">
+      <bib:techreport>
+<!--required fields-->
+        <bib:author>Willett, R. and Nowak, R.</bib:author>
+        <bib:title>A Multiscale Approach for Recovering Edges and Surfaces in Photon Limited Medical Imaging</bib:title>
+        <bib:institution>Dept. of Electrical and Computing Engineering, Rice University</bib:institution>
+        <bib:year>2002</bib:year>
+<!--optional fields-->
+        <bib:type>Technical report</bib:type>
+        <bib:number/>
+        <bib:address/>
+        <bib:month/>
+        <bib:note/>
+      </bib:techreport>
+    </bib:entry>
+  </bib:file>
+</document>

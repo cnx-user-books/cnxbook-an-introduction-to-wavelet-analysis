@@ -1,0 +1,38 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Introduction for "An Introduction to Wavelet Analysis"</title>
+  <metadata>
+  <md:content-id>m17393</md:content-id><md:title>Introduction for "An Introduction to Wavelet Analysis"</md:title>
+  <md:abstract/>
+  <md:uuid>51740352-b465-4368-a4d4-cca69e06b4ff</md:uuid>
+</metadata>
+
+<content>
+    
+    
+      <para id="id2253740">In this chapter, we give an overview on multiresolution analysis, wavelet series and wavelet estimators in the classical setting.
+By `classical' or `first-generation' wavelets,  we mean wavelets
+that were constructed initially to analyze signals observed
+at equispaced design points and having a sample size which is a power of two.
+The `second-generation' wavelet basis presented in the subsequent chapters will release these two constraints.</para>
+      <para id="id2253755">If one wants to analyze a function of time with a series expansion, the first idea that comes probably into one's mind is to use a Fourier  series, i.e. decompose the function into sine and cosine at different frequencies.
+In this process, we hope that only a few coefficients in the series will carry most
+of the information about the signal. Certain smooth functions have such an
+`economical' Fourier expansion. However, for most functions, a good Fourier series
+approximation requires numerous sine and cosine basis functions. Indeed, the sine
+functions have a precise frequency but are not localized in time, hence a localized
+information in the signal like a discontinuity will affect all the coefficients of the
+series. This drawback lead the researchers to look for more efficient bases, that is,
+bases which are localized both in time and in frequency. We will see in
+<link document="m17394">Multiresolution analysis and wavelets</link> that
+a wavelet basis offers this property.</para>
+      <para id="id2253793">This chapter is structured as follows. We begin by recalling some notations in <link document="m17392"> Function spaces: notion and notations</link>. Next <link document="m17394"> Multiresolution analysis and wavelets</link> introduces the multiresolution analysis, the wavelet functions, and gives some simple examples of wavelet bases.
+<link document="m17391"> Fast wavelet transform</link> explains how to decompose a signal using the wavelet transform.
+Such wavelet transforms, also called `decimated', lack the property of translation-invariance. <link document="m17395"> Non-decimated wavelet transform</link> presents a widely used trick to make a wavelet transform translation-invariant.
+Since the main goal of a wavelet series is to provide
+a good approximation
+of a function belonging to a given space,
+<link document="m17390">Approximation of Functions</link> introduces some fundamental notions to measure the quality of such approximation.
+Finally, <link document="m17396">Nonparametric regression with wavelets</link> presents how to construct a nonparametric regression estimator using wavelets. First, the classical case of equally spaced design is considered. In the last part of <link document="m17396">Nonparametric regression with wavelets</link>, we review some existing methods that deal with irregular designs.</para>
+  </content>
+  <bib:file/>
+</document>

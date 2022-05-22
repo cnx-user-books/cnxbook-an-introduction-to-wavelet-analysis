@@ -1,0 +1,935 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Multiresolution analysis and wavelets</title>
+  <metadata>
+  <md:content-id>m17394</md:content-id><md:title>Multiresolution analysis and wavelets</md:title>
+  <md:abstract/>
+  <md:uuid>3ecb485d-fc55-4f40-98ae-5d328ac532b4</md:uuid>
+</metadata>
+
+<content>
+    
+    
+      <section id="uid1">
+        <title>Definition of subspaces <!--Math is not currently allowed in CNXML section title.--> and of scaling functions</title>
+        <para id="id2253763">A natural way to introduce wavelets is through the multiresolution analysis. Given a function <m:math><m:mrow><m:mi>f</m:mi><m:mo>∈</m:mo><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, a multiresolution of <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> will provide us with a sequence of spaces <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>,</m:mo><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>,</m:mo><m:mo>...</m:mo></m:mrow></m:math> such that the projections of <m:math><m:mi>f</m:mi></m:math> onto these spaces give finer and finer
+approximations (as <m:math><m:mrow><m:mi>j</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi></m:mrow></m:math>) of the function <m:math><m:mi>f</m:mi></m:math>.</para>
+        
+
+<note id="id2254134" type="Definition"><label>Definition</label> (Multiresolution analysis (MRA) in the first generation) 
+
+
+A <emphasis>multiresolution analysis</emphasis>  of <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> is defined as a sequence of closed subspaces <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>⊂</m:mo><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:math> with the following properties:</note>
+        <list id="id2254223" list-type="enumerated">
+          <item id="uid4">
+            <equation id="id2254230">
+              <m:math>
+                <m:mrow>
+                  <m:mo>...</m:mo>
+                  <m:mo>⊂</m:mo>
+                  <m:msub>
+                    <m:mi>V</m:mi>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mn>1</m:mn>
+                    </m:mrow>
+                  </m:msub>
+                  <m:mo>⊂</m:mo>
+                  <m:msub>
+                    <m:mi>V</m:mi>
+                    <m:mn>0</m:mn>
+                  </m:msub>
+                  <m:mo>⊂</m:mo>
+                  <m:msub>
+                    <m:mi>V</m:mi>
+                    <m:mn>1</m:mn>
+                  </m:msub>
+                  <m:mo>⊂</m:mo>
+                  <m:mo>...</m:mo>
+                </m:mrow>
+              </m:math>
+            </equation>
+          </item>
+          <item id="uid5">The spaces <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> satisfy
+<equation id="id2254305"><m:math mode="display"><m:mrow><m:munder><m:mo>⋃</m:mo><m:mrow><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:munder><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mspace width="4.pt"/><m:mtext>is</m:mtext><m:mspace width="4.pt"/><m:mtext>dense</m:mtext><m:mspace width="4.pt"/><m:mtext>in</m:mtext><m:mspace width="4.pt"/><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow><m:mspace width="4.pt"/><m:mtext>and</m:mtext><m:mspace width="4.pt"/><m:munder><m:mo>⋂</m:mo><m:mrow><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:munder><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo><m:mn>0</m:mn><m:mo>}</m:mo></m:mrow><m:mspace width="3.33333pt"/><m:mo>.</m:mo></m:mrow></m:math></equation></item>
+          <item id="uid6">If <m:math><m:mrow><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>,</m:mo><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>,</m:mo></m:mrow></m:math> i.e. the spaces <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> are scaled versions of the central space <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>.</m:mo></m:mrow></m:math></item>
+          <item id="uid7">If <m:math><m:mrow><m:mi>f</m:mi><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>,</m:mo><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:mo>.</m:mo><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>,</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:math>, that is,
+<m:math><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub></m:math> (and hence all the <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math>) is invariant under translation.
+</item>
+          <item id="uid8">There exists <m:math><m:mrow><m:mi>ϕ</m:mi><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub></m:mrow></m:math> such that <m:math><m:mrow><m:mo>{</m:mo><m:mi>ϕ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo><m:mo>;</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> is a Riesz basis in <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>.</m:mo></m:mrow></m:math></item>
+        </list>
+        <para id="id2254694">We will call `level' of a MRA one of the subspaces <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math>.
+From <link target-id="id2254134"/>, it follows that, for fixed <m:math><m:mi>j</m:mi></m:math>, the set
+<m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>ϕ</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mrow><m:mi>j</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow><m:mo>;</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> of scaled and translated versions of <m:math><m:mi>ϕ</m:mi></m:math> is a Riesz  basis for <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math>.
+Since <m:math><m:mrow><m:mi>ϕ</m:mi><m:mo>∈</m:mo><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub><m:mo>⊂</m:mo><m:msub><m:mi>V</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:math>, we can express <m:math><m:mi>ϕ</m:mi></m:math> as a linear combination of <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>ϕ</m:mi><m:mrow><m:mn>1</m:mn><m:mo>,</m:mo><m:mi>k</m:mi></m:mrow></m:msub><m:mo>}</m:mo></m:mrow></m:math>:</para>
+        <equation id="uid10">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>ϕ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>k</m:mi>
+                  <m:mo>∈</m:mo>
+                  <m:mi mathvariant="double-struck">Z</m:mi>
+                </m:mrow>
+              </m:munder>
+              <m:msub>
+                <m:mi>h</m:mi>
+                <m:mi>k</m:mi>
+              </m:msub>
+              <m:msub>
+                <m:mi>ϕ</m:mi>
+                <m:mrow>
+                  <m:mn>1</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:msqrt>
+                <m:mn>2</m:mn>
+              </m:msqrt>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>k</m:mi>
+                  <m:mo>∈</m:mo>
+                  <m:mi mathvariant="double-struck">Z</m:mi>
+                </m:mrow>
+              </m:munder>
+              <m:msub>
+                <m:mi>h</m:mi>
+                <m:mi>k</m:mi>
+              </m:msub>
+              <m:mi>ϕ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mn>2</m:mn>
+                <m:mi>x</m:mi>
+                <m:mo>-</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255008"><link target-id="uid10"/> is called the <emphasis>two-scale equation</emphasis>  or  <emphasis>refinement equation</emphasis>. It is a fundamental equation in MRA since it tells us how to go from a <emphasis>fine level</emphasis><m:math><m:msub><m:mi>V</m:mi><m:mn>1</m:mn></m:msub></m:math> to a <emphasis>coarser level</emphasis><m:math><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub></m:math>. The function <m:math><m:mi>ϕ</m:mi></m:math> is called the <emphasis>scaling function</emphasis>.</para>
+        <para id="id2255093">As said before, the spaces <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> will be used to approximate general functions. This will be done by defining appropriate projections onto these spaces. Since the union of all the <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> is dense in <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo></m:mrow></m:math> we are guaranteed that any given function of
+<m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> can be approximated arbitrarily close by such projections.
+As an example, define the space <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> as</para>
+        <equation id="uid13">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>V</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:mrow>
+                <m:mo>{</m:mo>
+                <m:mi>f</m:mi>
+                <m:mo>∈</m:mo>
+                <m:msub>
+                  <m:mi>L</m:mi>
+                  <m:mn>2</m:mn>
+                </m:msub>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mi mathvariant="double-struck">R</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mo>;</m:mo>
+                <m:mo>∀</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>∈</m:mo>
+                <m:mi mathvariant="double-struck">Z</m:mi>
+                <m:mo>,</m:mo>
+                <m:mi>f</m:mi>
+                <m:msub>
+                  <m:mo>|</m:mo>
+                  <m:mrow>
+                    <m:mrow>
+                      <m:mo>[</m:mo>
+                    </m:mrow>
+                    <m:msup>
+                      <m:mn>2</m:mn>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>j</m:mi>
+                      </m:mrow>
+                    </m:msup>
+                    <m:mi>k</m:mi>
+                    <m:mo>,</m:mo>
+                    <m:msup>
+                      <m:mn>2</m:mn>
+                      <m:mrow>
+                        <m:mo>-</m:mo>
+                        <m:mi>j</m:mi>
+                      </m:mrow>
+                    </m:msup>
+                    <m:mrow>
+                      <m:mrow>
+                        <m:mo>(</m:mo>
+                        <m:mi>k</m:mi>
+                        <m:mo>+</m:mo>
+                        <m:mn>1</m:mn>
+                        <m:mo>)</m:mo>
+                      </m:mrow>
+                      <m:mo>[</m:mo>
+                    </m:mrow>
+                  </m:mrow>
+                </m:msub>
+                <m:mo>=</m:mo>
+                <m:mtext>constant</m:mtext>
+                <m:mo>}</m:mo>
+              </m:mrow>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255316">Then the scaling function <m:math><m:mrow><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub><m:mn>1</m:mn><m:mrow><m:mo>[</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mn>1</m:mn><m:mo>)</m:mo></m:mrow></m:msub><m:mrow><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, called the Haar scaling function, generates by translation and dilatation a MRA for the sequence of spaces <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>,</m:mo><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> defined in <link target-id="uid13"/>, see <link target-id="bid0"/>, <link target-id="bid1"/>.</para>
+      </section>
+      <section id="uid14">
+        <title>The detail space and the wavelet function</title>
+        <para id="id2255421">Rather  than considering all the nested spaces <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>,</m:mo></m:mrow></m:math> it would be more efficient to code only the information needed to go from <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> to <m:math><m:mrow><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>.</m:mo></m:mrow></m:math> Hence we consider the space <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math> which complements <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> in <m:math><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:math> :</para>
+        <equation id="uid16">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>V</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>+</m:mo>
+                  <m:mn>1</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mo>=</m:mo>
+              <m:msub>
+                <m:mi>V</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mo>⊕</m:mo>
+              <m:msub>
+                <m:mi>W</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255586">The space <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math> is not necessarily orthogonal to <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math>, but it always
+contains the <emphasis>detail</emphasis> information needed to go from an approximation at resolution <m:math><m:mi>j</m:mi></m:math> to an approximation at resolution <m:math><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn><m:mo>.</m:mo></m:mrow></m:math> Consequently, by using recursively the equation <link target-id="uid16"/>, we have for any <m:math><m:mrow><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:math>, the decomposition</para>
+        <equation id="id2255683"><m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mi>L</m:mi>
+                <m:mn>2</m:mn>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi mathvariant="double-struck">R</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:mover>
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>V</m:mi>
+                    <m:msub>
+                      <m:mi>j</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                  </m:msub>
+                  <m:mo>⊕</m:mo>
+                  <m:msubsup>
+                    <m:mo>⊕</m:mo>
+                    <m:mrow>
+                      <m:mi>j</m:mi>
+                      <m:mo>=</m:mo>
+                      <m:msub>
+                        <m:mi>j</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:mrow>
+                    <m:mi>∞</m:mi>
+                  </m:msubsup>
+                  <m:msub>
+                    <m:mi>W</m:mi>
+                    <m:mi>j</m:mi>
+                  </m:msub>
+                </m:mrow>
+                <m:mo>¯</m:mo>
+              </m:mover>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2255767">With the notational convention that <m:math><m:mrow><m:msub><m:mi>W</m:mi><m:mrow><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub><m:mo>:</m:mo><m:mo>=</m:mo><m:msub><m:mi>V</m:mi><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub></m:msub></m:mrow></m:math>,
+we call the sequence</para>
+        <para id="id2255818"><m:math><m:msub><m:mrow><m:mo>{</m:mo><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub><m:mo>}</m:mo></m:mrow><m:mrow><m:mi>j</m:mi><m:mo>≥</m:mo><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:math>
+a <emphasis>multiscale decomposition</emphasis> (<emphasis>MSD</emphasis>).  </para>
+        <para id="id2255877">We call <m:math><m:mi>ψ</m:mi></m:math> a wavelet  function  whenever the set <m:math><m:mrow><m:mo>{</m:mo><m:mi>ψ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo><m:mo>;</m:mo><m:mspace width="0.166667em"/><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> is a Riesz basis of <m:math><m:msub><m:mi>W</m:mi><m:mn>0</m:mn></m:msub></m:math>. Since <m:math><m:mrow><m:msub><m:mi>W</m:mi><m:mn>0</m:mn></m:msub><m:mo>⊂</m:mo><m:msub><m:mi>V</m:mi><m:mn>1</m:mn></m:msub></m:mrow></m:math>, there also exist a refinement equation for <m:math><m:mi>ψ</m:mi></m:math>, similarly to <link target-id="uid10"/>:</para>
+        <equation id="uid19"><m:math mode="display">
+            <m:mrow>
+              <m:mi>ψ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:msqrt>
+                <m:mn>2</m:mn>
+              </m:msqrt>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:msub>
+                <m:mi>g</m:mi>
+                <m:mi>k</m:mi>
+              </m:msub>
+              <m:mi>ϕ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mn>2</m:mn>
+                <m:mi>x</m:mi>
+                <m:mo>-</m:mo>
+                <m:mi>k</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2256054">The collection of wavelet functions <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>ψ</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mrow><m:mi>j</m:mi><m:mo>/</m:mo><m:mn>2</m:mn></m:mrow></m:msup><m:mi>ψ</m:mi><m:mrow><m:mo>(</m:mo><m:msup><m:mn>2</m:mn><m:mi>j</m:mi></m:msup><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo></m:mrow><m:mo>;</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>,</m:mo><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> is then a Riesz basis for
+<m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>. One of the main features of the wavelet functions is that they possess a certain number of vanishing moments.</para>
+        <note id="id2256342" type="Definition"><label>Definition</label>A wavelet function <m:math><m:mrow><m:mi>ψ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> has <m:math><m:mi>N</m:mi></m:math><emphasis>vanishing moments</emphasis>  if 
+          <m:math mode="display">
+            <m:mrow>
+              <m:mo>∫</m:mo>
+              <m:mi>ψ</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:msup>
+                <m:mi>x</m:mi>
+                <m:mi>p</m:mi>
+              </m:msup>
+              <m:mi>d</m:mi>
+              <m:mi>x</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn>0</m:mn>
+              <m:mo>,</m:mo>
+              <m:mspace width="0.277778em"/>
+              <m:mi>p</m:mi>
+              <m:mo>=</m:mo>
+              <m:mn>0</m:mn>
+              <m:mo>,</m:mo>
+              <m:mo>...</m:mo>
+              <m:mo>,</m:mo>
+              <m:mi>N</m:mi>
+              <m:mo>-</m:mo>
+              <m:mn>1</m:mn>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </note>
+        
+        <para id="id2256280">We now mention two interesting cases of wavelet bases.</para>
+      </section>
+      <section id="uid22">
+        <title>Orthogonal bases</title>
+        <para id="id2256292">In an <emphasis>orthogonal multiresolution analysis</emphasis>, the spaces <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math> are defined as the orthogonal complement of <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> in <m:math><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:math>.
+The following theorem tells us one of the main advantages of such a MRA.</para>
+        <note id="id2256353" type="Theorem"><label>Theorem</label>(<link target-id="bid1"/>, Theorem 5.1.1) 
+
+
+If a sequence of closed subspaces <m:math><m:msub><m:mrow><m:mo>(</m:mo><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub><m:mo>)</m:mo></m:mrow><m:mrow><m:mi>j</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi></m:mrow></m:msub></m:math> in <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>
+satisfies <link target-id="id2254134"/>, and if, in addition, <m:math><m:mrow><m:mo>{</m:mo><m:mi>ϕ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo><m:mo>,</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> is an orthogonal basis for <m:math><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub></m:math>, then there exists one function <m:math><m:mrow><m:mi>ψ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math> such that <m:math><m:mrow><m:mo>{</m:mo><m:mi>ψ</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>-</m:mo><m:mi>k</m:mi><m:mo>)</m:mo><m:mo>;</m:mo><m:mspace width="0.166667em"/><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> forms an orthogonal basis for the orthogonal complement <m:math><m:msub><m:mi>W</m:mi><m:mn>0</m:mn></m:msub></m:math> of <m:math><m:msub><m:mi>V</m:mi><m:mn>0</m:mn></m:msub></m:math> in <m:math><m:msub><m:mi>V</m:mi><m:mn>1</m:mn></m:msub></m:math>.</note>
+        <para id="id2256585">An immediate consequence of <link target-id="id2256353"/> is that
+<m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>ψ</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mo>,</m:mo><m:mi>k</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">Z</m:mi><m:mo>}</m:mo></m:mrow></m:math> constitutes an orthogonal basis for the orthogonal complement <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math> of <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> in <m:math><m:msub><m:mi>V</m:mi><m:mrow><m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn></m:mrow></m:msub></m:math>.
+In this section, let <m:math><m:msub><m:mi mathvariant="script">P</m:mi><m:mi>j</m:mi></m:msub></m:math> (resp. <m:math><m:msub><m:mi mathvariant="script">Q</m:mi><m:mi>j</m:mi></m:msub></m:math>) be the <emphasis>orthogonal</emphasis> projection
+operator onto <m:math><m:msub><m:mi>V</m:mi><m:mi>j</m:mi></m:msub></m:math> (resp. <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math>). The orthogonal expansion</para>
+        <equation id="id2256748">
+          <m:math mode="display">
+            <m:mtable displaystyle="true">
+              <m:mtr>
+                <m:mtd columnalign="right">
+                  <m:mi>f</m:mi>
+                </m:mtd>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi mathvariant="script">P</m:mi>
+                      <m:msub>
+                        <m:mi>j</m:mi>
+                        <m:mn>0</m:mn>
+                      </m:msub>
+                    </m:msub>
+                    <m:mi>f</m:mi>
+                    <m:mo>+</m:mo>
+                    <m:munderover>
+                      <m:mo>∑</m:mo>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>=</m:mo>
+                        <m:msub>
+                          <m:mi>j</m:mi>
+                          <m:mn>0</m:mn>
+                        </m:msub>
+                      </m:mrow>
+                      <m:mi>∞</m:mi>
+                    </m:munderover>
+                    <m:msub>
+                      <m:mi mathvariant="script">Q</m:mi>
+                      <m:mi>j</m:mi>
+                    </m:msub>
+                    <m:mi>f</m:mi>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+              <m:mtr>
+                <m:mtd/>
+                <m:mtd>
+                  <m:mo>=</m:mo>
+                </m:mtd>
+                <m:mtd columnalign="left">
+                  <m:mrow>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:mfenced separators="" open="〈" close="〉">
+                      <m:mi>f</m:mi>
+                      <m:mspace width="0.166667em"/>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mi>ϕ</m:mi>
+                        <m:mrow>
+                          <m:msub>
+                            <m:mi>j</m:mi>
+                            <m:mn>0</m:mn>
+                          </m:msub>
+                          <m:mo>,</m:mo>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mfenced>
+                    <m:msub>
+                      <m:mi>ϕ</m:mi>
+                      <m:mrow>
+                        <m:msub>
+                          <m:mi>j</m:mi>
+                          <m:mn>0</m:mn>
+                        </m:msub>
+                        <m:mo>,</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                    <m:mo>+</m:mo>
+                    <m:munderover>
+                      <m:mo>∑</m:mo>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mo>=</m:mo>
+                        <m:msub>
+                          <m:mi>j</m:mi>
+                          <m:mn>0</m:mn>
+                        </m:msub>
+                      </m:mrow>
+                      <m:mi>∞</m:mi>
+                    </m:munderover>
+                    <m:munder>
+                      <m:mo>∑</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:munder>
+                    <m:mfenced separators="" open="〈" close="〉">
+                      <m:mi>f</m:mi>
+                      <m:mspace width="0.166667em"/>
+                      <m:mo>,</m:mo>
+                      <m:msub>
+                        <m:mi>ψ</m:mi>
+                        <m:mrow>
+                          <m:mi>j</m:mi>
+                          <m:mi>k</m:mi>
+                        </m:mrow>
+                      </m:msub>
+                    </m:mfenced>
+                    <m:msub>
+                      <m:mi>ψ</m:mi>
+                      <m:mrow>
+                        <m:mi>j</m:mi>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:msub>
+                  </m:mrow>
+                </m:mtd>
+              </m:mtr>
+            </m:mtable>
+          </m:math>
+        </equation>
+        <para id="id2256965">tells us that a first, coarse approximation of <m:math><m:mi>f</m:mi></m:math> in <m:math><m:msub><m:mi>V</m:mi><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub></m:msub></m:math> is further refined with the projection of <m:math><m:mi>f</m:mi></m:math> onto the detail  spaces <m:math><m:msub><m:mi>W</m:mi><m:mi>j</m:mi></m:msub></m:math>.</para>
+        <para id="id2257030"><link target-id="uid27"/> shows two examples of orthogonal wavelet functions. The first is the Haar  wavelet, associated to the Haar scaling function defined in <link target-id="uid1">"Definition of subspaces V j  and of scaling functions"</link>.</para>
+        <equation id="id2257050">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>ψ</m:mi>
+              <m:msup>
+                <m:mrow>
+                  <m:mo>(</m:mo>
+                  <m:mi>x</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+                <m:mtext>Haar</m:mtext>
+              </m:msup>
+              <m:mo>=</m:mo>
+              <m:msup>
+                <m:mn>2</m:mn>
+                <m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>/</m:mo>
+                  <m:mn>2</m:mn>
+                </m:mrow>
+              </m:msup>
+              <m:mfenced separators="" open="(" close=")">
+                <m:mrow>
+                  <m:msup>
+                    <m:mi>ϕ</m:mi>
+                    <m:mtext>Haar</m:mtext>
+                  </m:msup>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mn>2</m:mn>
+                    <m:mi>x</m:mi>
+                    <m:mo>-</m:mo>
+                    <m:mn>1</m:mn>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                  <m:mo>-</m:mo>
+                  <m:msup>
+                    <m:mi>ϕ</m:mi>
+                    <m:mtext>Haar</m:mtext>
+                  </m:msup>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mn>2</m:mn>
+                    <m:mi>x</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:msub>
+                <m:mn>1</m:mn>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mfrac>
+                    <m:mn>1</m:mn>
+                    <m:mn>2</m:mn>
+                  </m:mfrac>
+                  <m:mo>,</m:mo>
+                  <m:mn>1</m:mn>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>-</m:mo>
+              <m:msub>
+                <m:mn>1</m:mn>
+                <m:mrow>
+                  <m:mo>[</m:mo>
+                  <m:mn>0</m:mn>
+                  <m:mo>,</m:mo>
+                  <m:mfrac>
+                    <m:mn>1</m:mn>
+                    <m:mn>2</m:mn>
+                  </m:mfrac>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257210">The Haar wavelet has only one vanishing moment and consequently is optimal only to represent functions having a low degree of regularity, like, for example, <m:math><m:mrow><m:mi>β</m:mi><m:mo>-</m:mo></m:mrow></m:math>Hölder functions with <m:math><m:mrow><m:mn>0</m:mn><m:mo>&lt;</m:mo><m:mi>β</m:mi><m:mo>&lt;</m:mo><m:mn>1</m:mn></m:mrow></m:math>.</para>
+        <para id="id2257250">Daubechies constructed in <link target-id="bid2"/>, <link target-id="bid1"/> compactly supported wavelets which have more than one vanishing moment. Compactly supported wavelets are desirable from a numerical point of view, while having more than one vanishing moment allows to reconstruct exactly polynomials of higher order.
+These wavelets cannot, in general, be written in a closed analytic form. However, their graph can be computed with arbitrarily high precision using a subdivision scheme algorithm.
+<link target-id="uid27"/>(b) represents the Daubechies Least Asymmetric  wavelet with <m:math><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math> vanishing moments.</para>
+        <figure id="uid27" orient="vertical"><subfigure id="id2257363">
+            <media id="id1170688664598" alt=""><image src="../../media/psihaarF-c8e8.png" mime-type="image/png" width="512"/><image for="pdf" src="../../media/psihaarF.eps" mime-type="application/postscript" print-width="7.2cm"/></media>
+<caption>(a) <m:math><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:math></caption>
+          </subfigure>
+<subfigure id="id2257372">
+            <media id="id1170680060319" alt=""><image src="../../media/psisym4-0b76.png" mime-type="image/png" width="476"/><image for="pdf" src="../../media/psisym4.eps" mime-type="application/postscript" print-width="6.75cm"/></media>
+<caption>(b)<m:math><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:math></caption>
+          </subfigure><caption>Some orthogonal basis functions:
+(a) the Haar wavelet function bases with <m:math><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math> vanishing moments,
+(b) the Least Asymmetric wavelet function of Daubechies <link target-id="bid1"/>, <link target-id="bid2"/>, with <m:math><m:mrow><m:mi>N</m:mi><m:mo>=</m:mo><m:mn>4</m:mn></m:mrow></m:math> vanishing moments.</caption></figure>
+        <para id="id2257381">This figure also illustrates the reason behind the name `wavelet': since wavelets are functions with a certain number of vanishing moments, they have the shape of a `little wave' or `wavelet'.</para>
+      </section>
+      <section id="uid28">
+        <title>Biorthogonal bases</title>
+        <para id="id2257396">Having an orthogonal MRA puts strong constraints on the construction of a wavelet basis. 
+For example, the Haar wavelet is the only real-valued function which is compactly supported and symmetric.
+However, if we relax orthogonality for <emphasis>biorthogonality</emphasis>, then it becomes
+possible to have real-valued wavelet bases of fixed but arbitrary <emphasis>high order</emphasis> (see <link document="m17390" target-id="id2253744">Definition 1 from Approximation of Functions</link>) which are symmetric and compactly supported <link target-id="bid3"/>.
+In a biorthogonal setting, a dual scaling function <m:math><m:mover accent="true"><m:mi>ϕ</m:mi><m:mo>˜</m:mo></m:mover></m:math> and a dual wavelet function <m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> exist.  They generate a dual MRA  with subspaces <m:math><m:msub><m:mover accent="true"><m:mi>V</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi></m:msub></m:math> 
+and complement spaces <m:math><m:msub><m:mover accent="true"><m:mi>W</m:mi><m:mo>˜</m:mo></m:mover><m:mi>j</m:mi></m:msub></m:math> such that</para>
+        <equation id="id2257512">
+          <m:math mode="display">
+            <m:mrow>
+              <m:msub>
+                <m:mover accent="true">
+                  <m:mi>V</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="0.277778em"/>
+              <m:mspace width="0.277778em"/>
+              <m:mi>⊥</m:mi>
+              <m:mspace width="0.277778em"/>
+              <m:mspace width="0.277778em"/>
+              <m:msub>
+                <m:mi>W</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="1.em"/>
+              <m:mtext>and</m:mtext>
+              <m:mspace width="1.em"/>
+              <m:msub>
+                <m:mi>V</m:mi>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="0.277778em"/>
+              <m:mspace width="0.277778em"/>
+              <m:mi>⊥</m:mi>
+              <m:mspace width="0.277778em"/>
+              <m:mspace width="0.277778em"/>
+              <m:msub>
+                <m:mover accent="true">
+                  <m:mi>W</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mi>j</m:mi>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257611">In other words,</para>
+        <equation id="id2257617">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mover accent="true">
+                  <m:mi>ϕ</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:mrow>
+                  <m:mi>ψ</m:mi>
+                  <m:mo>(</m:mo>
+                  <m:mo>·</m:mo>
+                  <m:mo>-</m:mo>
+                  <m:mi>k</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:mn>0</m:mn>
+              <m:mspace width="1.em"/>
+              <m:mtext>and</m:mtext>
+              <m:mspace width="1.em"/>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>ϕ</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:mrow>
+                  <m:mover accent="true">
+                    <m:mi>ψ</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mrow>
+                    <m:mo>(</m:mo>
+                    <m:mo>·</m:mo>
+                    <m:mo>-</m:mo>
+                    <m:mi>k</m:mi>
+                    <m:mo>)</m:mo>
+                  </m:mrow>
+                </m:mrow>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:mn>0</m:mn>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257719">Moreover, the dual functions also have to satisfy</para>
+        <equation id="id2257726">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mover accent="true">
+                  <m:mi>ϕ</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:mrow>
+                  <m:mi>ϕ</m:mi>
+                  <m:mo>(</m:mo>
+                  <m:mo>·</m:mo>
+                  <m:mo>-</m:mo>
+                  <m:mi>k</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mrow>
+                  <m:mi>k</m:mi>
+                  <m:mo>,</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="1.em"/>
+              <m:mtext>and</m:mtext>
+              <m:mspace width="1.em"/>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mover accent="true">
+                  <m:mi>ψ</m:mi>
+                  <m:mo>˜</m:mo>
+                </m:mover>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:mrow>
+                  <m:mi>ψ</m:mi>
+                  <m:mo>(</m:mo>
+                  <m:mo>·</m:mo>
+                  <m:mo>-</m:mo>
+                  <m:mi>k</m:mi>
+                  <m:mo>)</m:mo>
+                </m:mrow>
+              </m:mfenced>
+              <m:mo>=</m:mo>
+              <m:msub>
+                <m:mi>δ</m:mi>
+                <m:mrow>
+                  <m:mi>k</m:mi>
+                  <m:mo>,</m:mo>
+                  <m:mn>0</m:mn>
+                </m:mrow>
+              </m:msub>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>,</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2257854">where <m:math><m:msub><m:mi>δ</m:mi><m:mrow><m:mi>k</m:mi><m:mo>,</m:mo><m:mn>0</m:mn></m:mrow></m:msub></m:math> is the Kronecker symbol.
+By construction, the dual scaling and wavelet functions satisfy a refinement equation, similarly to the equations <link target-id="uid10"/> and <link target-id="uid19"/>.</para>
+        <para id="id2257893">In this work, we use the following convention: the dual MSD will be used to decompose a function (or a signal), while the original, or primal MSD reconstructs the function.
+This yields the following representation of a function <m:math><m:mrow><m:mi>f</m:mi><m:mo>∈</m:mo><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math></para>
+        <equation id="uid31">
+          <m:math mode="display">
+            <m:mrow>
+              <m:mi>f</m:mi>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>=</m:mo>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:msub>
+                  <m:mover accent="true">
+                    <m:mi>ϕ</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi>j</m:mi>
+                      <m:mn>0</m:mn>
+                    </m:msub>
+                    <m:mo>,</m:mo>
+                    <m:mi>k</m:mi>
+                  </m:mrow>
+                </m:msub>
+              </m:mfenced>
+              <m:msub>
+                <m:mi>ϕ</m:mi>
+                <m:mrow>
+                  <m:msub>
+                    <m:mi>j</m:mi>
+                    <m:mn>0</m:mn>
+                  </m:msub>
+                  <m:mo>,</m:mo>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>+</m:mo>
+              <m:munderover>
+                <m:mo>∑</m:mo>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mo>=</m:mo>
+                  <m:msub>
+                    <m:mi>j</m:mi>
+                    <m:mn>0</m:mn>
+                  </m:msub>
+                </m:mrow>
+                <m:mi>∞</m:mi>
+              </m:munderover>
+              <m:munder>
+                <m:mo>∑</m:mo>
+                <m:mi>k</m:mi>
+              </m:munder>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:msub>
+                  <m:mover accent="true">
+                    <m:mi>ψ</m:mi>
+                    <m:mo>˜</m:mo>
+                  </m:mover>
+                  <m:mrow>
+                    <m:mi>j</m:mi>
+                    <m:mi>k</m:mi>
+                  </m:mrow>
+                </m:msub>
+              </m:mfenced>
+              <m:msub>
+                <m:mi>ψ</m:mi>
+                <m:mrow>
+                  <m:mi>j</m:mi>
+                  <m:mi>k</m:mi>
+                </m:mrow>
+              </m:msub>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mspace width="3.33333pt"/>
+              <m:mo>.</m:mo>
+            </m:mrow>
+          </m:math>
+        </equation>
+        <para id="id2258115"><link target-id="uid33"/> shows an example of a biorthogonal wavelet basis built by Cohen, Daubechies and Feauveau in <link target-id="bid3"/>, (called CDF-wavelets hereafter).  </para>
+        <figure id="uid33" orient="horizontal">
+          <media id="id1170682076037" alt=""><image src="../../media/cdf31EJo-f0f2.png" mime-type="image/png" width="471"/><image for="pdf" src="../../media/cdf31EJo.eps" mime-type="application/postscript" print-width="12.0cm"/></media>
+          <caption>Primal and dual scaling and wavelet functions for the (3,1)-Cohen-Daubechies-Feauveau (CDF) biorthogonal basis. The primal wavelet function <m:math><m:mi>ψ</m:mi></m:math> has one vanishing moment while the dual wavelet
+<m:math><m:mover accent="true"><m:mi>ψ</m:mi><m:mo>˜</m:mo></m:mover></m:math> has three vanishing moments.</caption>
+        </figure>
+      </section>
+  </content>
+  <bib:file>
+    <bib:entry id="bid3">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Cohen, A. and Daubechies, I. and Feauveau., J.</bib:author>
+        <bib:title>Bi-orthogonal bases of compactly supported wavelets.</bib:title>
+        <bib:journal>Comm. Pure Appl. Math.</bib:journal>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:volume>45</bib:volume>
+        <bib:number/>
+        <bib:pages>485-560</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid2">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Daubechies, I.</bib:author>
+        <bib:title>Orthonormales bases of compactly supported wavelets.</bib:title>
+        <bib:journal>Comm. Pure Appl. Math.</bib:journal>
+        <bib:year>1988</bib:year>
+<!--optional fields-->
+        <bib:volume>41</bib:volume>
+        <bib:number/>
+        <bib:pages>909-996</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:book>
+<!--required fields-->
+        <bib:author>Daubechies, I.</bib:author>
+        <bib:title>Ten Lectures on Wavelets</bib:title>
+        <bib:publisher>SIAM</bib:publisher>
+        <bib:year>1992</bib:year>
+<!--optional fields-->
+        <bib:volume/>
+        <bib:series/>
+        <bib:address>Philadelphia</bib:address>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:phdthesis>
+<!--required fields-->
+        <bib:author>Kovac, A.</bib:author>
+        <bib:title>Wavelet Thresholding for Unequally Spaced Data</bib:title>
+        <bib:school>University of Bristol</bib:school>
+        <bib:year>1998</bib:year>
+<!--optional fields-->
+        <bib:type>Ph. D. Thesis</bib:type>
+        <bib:address/>
+        <bib:month>March</bib:month>
+        <bib:note/>
+      </bib:phdthesis>
+    </bib:entry>
+  </bib:file>
+</document>

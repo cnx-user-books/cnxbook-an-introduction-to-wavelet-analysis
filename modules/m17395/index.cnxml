@@ -1,0 +1,169 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Non-decimated wavelet transform</title>
+  <metadata>
+  <md:content-id>m17395</md:content-id><md:title>Non-decimated wavelet transform</md:title>
+  <md:abstract/>
+  <md:uuid>8b480806-d8cc-4099-b912-1d464b438a4e</md:uuid>
+</metadata>
+
+<content>
+    
+    
+      <para id="id2253740">Suppose we have some signal <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>y</m:mi><m:mi>i</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> observed at some equispaced design points : <m:math><m:mrow><m:msub><m:mi>y</m:mi><m:mi>i</m:mi></m:msub><m:mo>=</m:mo><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo><m:mi>i</m:mi><m:mo>/</m:mo><m:mi>n</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:mi>n</m:mi></m:mrow></m:math> with <m:math><m:mrow><m:mi>n</m:mi><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mi>J</m:mi></m:msup><m:mo>,</m:mo><m:mspace width="0.277778em"/><m:mi>J</m:mi><m:mo>∈</m:mo><m:mi mathvariant="double-struck">N</m:mi></m:mrow></m:math>. 
+The transform presented in the previous section is sometimes called `decimated' because, for each scale <m:math><m:mi>j</m:mi></m:math>, the coefficients <m:math><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub></m:math> give only some information about the signal near the positions <m:math><m:mrow><m:mi>x</m:mi><m:mo>=</m:mo><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mi>j</m:mi></m:mrow></m:msup><m:mi>k</m:mi></m:mrow></m:math>, and not near all the existing design points <m:math><m:mrow><m:msup><m:mn>2</m:mn><m:mrow><m:mo>-</m:mo><m:mi>J</m:mi></m:mrow></m:msup><m:mi>k</m:mi><m:mo>=</m:mo><m:mi>k</m:mi><m:mo>/</m:mo><m:mi>n</m:mi></m:mrow></m:math>.</para>
+      <para id="id2254176">For this reason, the decimated wavelet transform lacks the property of translation invariance: given <m:math><m:mrow><m:msub><m:mi>t</m:mi><m:mn>0</m:mn></m:msub><m:mo>∈</m:mo><m:mi mathvariant="double-struck">R</m:mi></m:mrow></m:math>, the wavelet decomposition of <m:math><m:mrow><m:mi>f</m:mi><m:mo>(</m:mo><m:mo>.</m:mo><m:mo>)</m:mo></m:mrow></m:math> and of <m:math><m:mrow><m:mi>f</m:mi><m:mo>(</m:mo><m:mo>.</m:mo><m:mo>-</m:mo><m:msub><m:mi>t</m:mi><m:mn>0</m:mn></m:msub><m:mo>)</m:mo></m:mrow></m:math> are in general completely different. This may lead to some unwanted pseudo-Gibbs oscillations near a discontinuity which is not localized at a dyadic point <link target-id="bid0"/>. </para>
+      <para id="id2254258">One remedy to this drawback consists in using a non-decimated  wavelet transform (NDWT)
+,  also called <emphasis>translation-invariant (TI)</emphasis> <link target-id="bid0"/> or <emphasis>stationary</emphasis> <link target-id="bid1"/>.  
+The idea behind the NDWT is to a perform a discrete wavelet transform, not only of the original sequence <m:math><m:msubsup><m:mrow><m:mo>{</m:mo><m:msub><m:mi>y</m:mi><m:mi>i</m:mi></m:msub><m:mo>}</m:mo></m:mrow><m:mrow><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>n</m:mi></m:msubsup></m:math>, but of all the possible shifted sequences <m:math><m:mrow><m:msub><m:mrow><m:mo>(</m:mo><m:msub><m:mi>S</m:mi><m:mi>h</m:mi></m:msub><m:mi>y</m:mi><m:mo>)</m:mo></m:mrow><m:mi>t</m:mi></m:msub><m:mo>=</m:mo><m:msub><m:mi>y</m:mi><m:mrow><m:mo>(</m:mo><m:mi>t</m:mi><m:mo>+</m:mo><m:mi>h</m:mi><m:mo>)</m:mo><m:mspace width="3.33333pt"/><m:mo form="prefix">mod</m:mo><m:mspace width="0.277778em"/><m:mi>n</m:mi></m:mrow></m:msub></m:mrow></m:math>.
+In terms of wavelet functions, this transform corresponds to a set of functions</para>
+      <equation id="id2254395">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mover accent="true">
+                <m:mi>ψ</m:mi>
+                <m:mo>˜</m:mo>
+              </m:mover>
+              <m:mrow>
+                <m:mi>j</m:mi>
+                <m:mi>k</m:mi>
+              </m:mrow>
+            </m:msub>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>=</m:mo>
+            <m:mover accent="true">
+              <m:mi>ψ</m:mi>
+              <m:mo>˜</m:mo>
+            </m:mover>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:msup>
+                <m:mn>2</m:mn>
+                <m:mi>j</m:mi>
+              </m:msup>
+              <m:mrow>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>-</m:mo>
+                <m:msup>
+                  <m:mn>2</m:mn>
+                  <m:mrow>
+                    <m:mo>-</m:mo>
+                    <m:mi>J</m:mi>
+                  </m:mrow>
+                </m:msup>
+                <m:mi>k</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mo>,</m:mo>
+            <m:mspace width="1.em"/>
+            <m:mi>j</m:mi>
+            <m:mo>=</m:mo>
+            <m:msub>
+              <m:mi>j</m:mi>
+              <m:mn>0</m:mn>
+            </m:msub>
+            <m:mo>,</m:mo>
+            <m:mo>...</m:mo>
+            <m:mo>,</m:mo>
+            <m:mi>J</m:mi>
+            <m:mo>-</m:mo>
+            <m:mn>1</m:mn>
+            <m:mo>,</m:mo>
+            <m:mspace width="0.166667em"/>
+            <m:mi>k</m:mi>
+            <m:mo>=</m:mo>
+            <m:mn>0</m:mn>
+            <m:mo>,</m:mo>
+            <m:mo>...</m:mo>
+            <m:mo>,</m:mo>
+            <m:msup>
+              <m:mn>2</m:mn>
+              <m:mi>J</m:mi>
+            </m:msup>
+            <m:mo>-</m:mo>
+            <m:mn>1</m:mn>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254540">At a given scale <m:math><m:mi>j</m:mi></m:math>, the NDWT coefficients are thus present at all the locations <m:math><m:mrow><m:mi>k</m:mi><m:mo>/</m:mo><m:mi>n</m:mi></m:mrow></m:math> for <m:math><m:mrow><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:mi>n</m:mi></m:mrow></m:math> and give information about the signal at each observed design point. In other words, the non-decimated transform fills in the gap introduced in the decimated transform, see <link target-id="uid4"/>.</para>
+      <figure id="uid4" orient="horizontal">
+        <media id="id6875470" alt=""><image src="../../media/image2.png" mime-type="image/png" width="905"/><image for="pdf" src="../../media/image2.eps" mime-type="application/postscript" print-width="10.5cm"/></media>
+        <caption>Schema illustrating the translation-invariant version of the Haar transform. The points marked by <m:math><m:mo>•</m:mo></m:math> are the one computed for the decimated Haar transform. At level <m:math><m:mi>J</m:mi></m:math>, one circulant shift is performed: the first observation is put at the end of the observed signal, and a second decimated transform is performed on the shifted data (yielding the points marked by <m:math><m:mo>∘</m:mo></m:math> at level <m:math><m:mrow><m:mi>J</m:mi><m:mo>-</m:mo><m:mn>1</m:mn></m:mrow></m:math>). This process is iterated at the coarser levels, producing detail coefficients at all the points.</caption>
+      </figure>
+      <para id="id2254661">Since we have <m:math><m:mrow><m:mi>J</m:mi><m:mo>-</m:mo><m:msub><m:mi>j</m:mi><m:mn>0</m:mn></m:msub></m:mrow></m:math> scales and at each scales <m:math><m:mi>n</m:mi></m:math> detail coefficients, the NDWT gives an overdetermined representation of the original signal <m:math><m:msubsup><m:mrow><m:mo>{</m:mo><m:msub><m:mi>y</m:mi><m:mi>i</m:mi></m:msub><m:mo>}</m:mo></m:mrow><m:mrow><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow><m:mi>n</m:mi></m:msubsup></m:math> and
+the wavelet coefficients <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>d</m:mi><m:mrow><m:mi>j</m:mi><m:mi>k</m:mi></m:mrow></m:msub><m:mo>,</m:mo><m:mi>j</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:mi>J</m:mi><m:mo>-</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>...</m:mo><m:mo>,</m:mo><m:mi>n</m:mi><m:mo>}</m:mo></m:mrow></m:math> are related to many different bases.
+Therefore the inverse operator will not be unique. A particular inverse, the average
+ basis, corresponds to systematically average out the inverse wavelet transform obtained from each decimated wavelet transform that constitutes the translation-invariant transform. This makes the reconstruction robust with respect to a bad choice of a particular basis.
+Moreover, this average basis provides a smoother reconstruction than the original, decimated, transform <link target-id="bid0"/>, <link target-id="bid2"/>.</para>
+      <para id="id2254818">It allows for a (nearly) exact reconstruction of piecewise linear functions, instead of piecewise constant functions for the decimated Haar transform <link target-id="bid0"/>.</para>
+    
+  </content>
+  <bib:file>
+    <bib:entry id="bid2">
+      <bib:article>
+<!--required fields-->
+        <bib:author>Berkner, K. and Wells, R.</bib:author>
+        <bib:title>Smoothness estimates for soft-threshold denoising via translation invariant wavelet transforms.</bib:title>
+        <bib:journal>Appl. Comput. Harmon. Anal.</bib:journal>
+        <bib:year>2002</bib:year>
+<!--optional fields-->
+        <bib:volume>12</bib:volume>
+        <bib:number/>
+        <bib:pages>1-24</bib:pages>
+        <bib:month/>
+        <bib:note/>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="bid0">
+      <bib:incollection>
+<!--required fields-->
+        <bib:author>Coifman, R.R. and Donoho, D.L.</bib:author>
+        <bib:title>Translation-Invariant De-Noising</bib:title>
+        <bib:booktitle>Wavelets in Statistics, Lectures Notes in Statistics, Vol. 103.</bib:booktitle>
+        <bib:publisher>Springer-Verlag</bib:publisher>
+        <bib:year>1995</bib:year>
+<!--optional fields-->
+        <bib:editor>Antoniadis, A. and Oppenheim, G.</bib:editor>
+        <bib:number/>
+        <bib:series/>
+        <bib:type/>
+        <bib:chapter/>
+        <bib:pages>125-150</bib:pages>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:incollection>
+    </bib:entry>
+    <bib:entry id="bid1">
+      <bib:incollection>
+<!--required fields-->
+        <bib:author>Nason, G.P. and Silverman, B.W.</bib:author>
+        <bib:title>The stationary wavelet transform and some statistical applications</bib:title>
+        <bib:booktitle>Wavelets in Statistics, Lectures Notes in Statistics, Vol. 103.</bib:booktitle>
+        <bib:publisher>Springer-Verlag</bib:publisher>
+        <bib:year>1995</bib:year>
+<!--optional fields-->
+        <bib:editor>Antoniadis, A. and Oppenheim, G.</bib:editor>
+        <bib:number/>
+        <bib:series/>
+        <bib:type/>
+        <bib:chapter/>
+        <bib:pages>281-299</bib:pages>
+        <bib:address/>
+        <bib:edition/>
+        <bib:month/>
+        <bib:note/>
+      </bib:incollection>
+    </bib:entry>
+  </bib:file>
+</document>

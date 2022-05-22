@@ -1,0 +1,187 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Function spaces: notion and notations</title>
+  <metadata>
+  <md:content-id>m17392</md:content-id><md:title>Function spaces: notion and notations</md:title>
+  <md:abstract/>
+  <md:uuid>4bd1a286-38f5-468a-9b98-1c295b5cebb2</md:uuid>
+</metadata>
+
+<content>
+    
+          <para id="id2253740">A Hilbert  space is a complete normed space whose norm is indexed by an inner (or scalar) product.</para>
+      <para id="id2253750">Two disjoint subspaces <m:math><m:mi>A</m:mi></m:math> and <m:math><m:mi>B</m:mi></m:math> of a space <m:math><m:mi>S</m:mi></m:math> form a direct  sum decomposition of <m:math><m:mi>S</m:mi></m:math> if every element of <m:math><m:mi>S</m:mi></m:math> can be written uniquely as a sum of an element of <m:math><m:mi>A</m:mi></m:math> and an element of <m:math><m:mi>B</m:mi></m:math>. The notation <m:math><m:mrow><m:mi>S</m:mi><m:mo>=</m:mo><m:mi>A</m:mi><m:mo>⊕</m:mo><m:mi>B</m:mi></m:mrow></m:math> is then used.</para>
+      <para id="id2253843">A measurable function <m:math><m:mi>f</m:mi></m:math> belongs to the Lebesgue space <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mi>p</m:mi></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mspace width="0.166667em"/><m:mn>1</m:mn><m:mo>≤</m:mo><m:mi>p</m:mi><m:mo>&lt;</m:mo><m:mi>∞</m:mi></m:mrow></m:math> if</para>
+      <equation id="id2253900">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mfenced open="∥" close="∥">
+                <m:mi>f</m:mi>
+              </m:mfenced>
+              <m:mi>p</m:mi>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:msup>
+              <m:mfenced separators="" open="(" close=")">
+                <m:mrow>
+                  <m:msubsup>
+                    <m:mo>∫</m:mo>
+                    <m:mrow>
+                      <m:mo>-</m:mo>
+                      <m:mi>∞</m:mi>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mo>+</m:mo>
+                      <m:mi>∞</m:mi>
+                    </m:mrow>
+                  </m:msubsup>
+                  <m:msup>
+                    <m:mfenced separators="" open="|" close="|">
+                      <m:mi>f</m:mi>
+                      <m:mo>(</m:mo>
+                      <m:mi>x</m:mi>
+                      <m:mo>)</m:mo>
+                    </m:mfenced>
+                    <m:mi>p</m:mi>
+                  </m:msup>
+                </m:mrow>
+              </m:mfenced>
+              <m:mrow>
+                <m:mn>1</m:mn>
+                <m:mo>/</m:mo>
+                <m:mi>p</m:mi>
+              </m:mrow>
+            </m:msup>
+            <m:mo>&lt;</m:mo>
+            <m:mi>∞</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2253072">An example of a Hilbert space is the Lebesgue  space <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> of measurable and square integrable functions. Indeed, the norm <m:math><m:msub><m:mfenced open="∥" close="∥"><m:mo>·</m:mo></m:mfenced><m:mn>2</m:mn></m:msub></m:math> is induced by the scalar product</para>
+      <equation id="id2254288">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mfenced separators="" open="〈" close="〉">
+              <m:mi>f</m:mi>
+              <m:mspace width="0.166667em"/>
+              <m:mo>,</m:mo>
+              <m:mi>g</m:mi>
+            </m:mfenced>
+            <m:mo>=</m:mo>
+            <m:mo>∫</m:mo>
+            <m:mi>f</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mover>
+              <m:mrow>
+                <m:mi>g</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>¯</m:mo>
+            </m:mover>
+            <m:mi>d</m:mi>
+            <m:mi>x</m:mi>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>,</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254352">where <m:math><m:mover><m:mrow><m:mi>g</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow><m:mo>¯</m:mo></m:mover></m:math> denotes the complex conjugate of <m:math><m:mrow><m:mi>g</m:mi><m:mo>(</m:mo><m:mi>x</m:mi><m:mo>)</m:mo></m:mrow></m:math>.
+Two functions are said to be orthogonal in <m:math><m:mrow><m:msub><m:mi>L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi mathvariant="double-struck">R</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math> if their inner product is zero.</para>
+      <para id="id2254420">The Lebesgue measure can be replaced by a more general measure <m:math><m:mi>μ</m:mi></m:math>, leading to the weighted  space <m:math><m:mrow><m:msub><m:mi mathvariant="bold">L</m:mi><m:mn>2</m:mn></m:msub><m:mrow><m:mo>(</m:mo><m:mi>μ</m:mi><m:mo>)</m:mo></m:mrow></m:mrow></m:math>, which has as inner product</para>
+      <equation id="id2254463">
+        <m:math mode="display">
+          <m:mrow>
+            <m:msub>
+              <m:mfenced separators="" open="〈" close="〉">
+                <m:mi>f</m:mi>
+                <m:mspace width="0.166667em"/>
+                <m:mo>,</m:mo>
+                <m:mi>g</m:mi>
+              </m:mfenced>
+              <m:mrow>
+                <m:mi>d</m:mi>
+                <m:mi>μ</m:mi>
+              </m:mrow>
+            </m:msub>
+            <m:mo>=</m:mo>
+            <m:mo>∫</m:mo>
+            <m:mi>f</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+            <m:mover>
+              <m:mrow>
+                <m:mi>g</m:mi>
+                <m:mo>(</m:mo>
+                <m:mi>x</m:mi>
+                <m:mo>)</m:mo>
+              </m:mrow>
+              <m:mo>¯</m:mo>
+            </m:mover>
+            <m:mi>d</m:mi>
+            <m:mi>μ</m:mi>
+            <m:mrow>
+              <m:mo>(</m:mo>
+              <m:mi>x</m:mi>
+              <m:mo>)</m:mo>
+            </m:mrow>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254537">and which contains the functions that have a finite norm <m:math><m:mrow><m:msub><m:mfenced open="∥" close="∥"><m:mi>f</m:mi></m:mfenced><m:mrow><m:mi>d</m:mi><m:mi>μ</m:mi></m:mrow></m:msub><m:mo>:</m:mo><m:mo>=</m:mo><m:msub><m:msqrt><m:mfenced separators="" open="〈" close="〉"><m:mi>f</m:mi><m:mspace width="0.166667em"/><m:mo>,</m:mo><m:mi>f</m:mi></m:mfenced></m:msqrt><m:mrow><m:mi>d</m:mi><m:mi>μ</m:mi></m:mrow></m:msub><m:mo>&lt;</m:mo><m:mi>∞</m:mi></m:mrow></m:math>.</para>
+      <para id="id2254602">A countable subset <m:math><m:mrow><m:mo>{</m:mo><m:msub><m:mi>f</m:mi><m:mi>k</m:mi></m:msub><m:mo>}</m:mo></m:mrow></m:math> of functions belonging to a Hilbert space is a Riesz  basis if every element <m:math><m:mi>f</m:mi></m:math> of the space can be written uniquely as
+<m:math><m:mrow><m:mi>f</m:mi><m:mo>=</m:mo><m:msub><m:mo>∑</m:mo><m:mi>k</m:mi></m:msub><m:msub><m:mi>c</m:mi><m:mi>k</m:mi></m:msub><m:msub><m:mi>f</m:mi><m:mi>k</m:mi></m:msub></m:mrow></m:math>, and if positive constants <m:math><m:mi>A</m:mi></m:math> and <m:math><m:mi>B</m:mi></m:math> exist such that</para>
+      <equation id="id2254691">
+        <m:math mode="display">
+          <m:mrow>
+            <m:mi>A</m:mi>
+            <m:msubsup>
+              <m:mfenced open="∥" close="∥">
+                <m:mi>f</m:mi>
+              </m:mfenced>
+              <m:mn>2</m:mn>
+              <m:mn>2</m:mn>
+            </m:msubsup>
+            <m:mo>≤</m:mo>
+            <m:munder>
+              <m:mo>∑</m:mo>
+              <m:mi>k</m:mi>
+            </m:munder>
+            <m:msup>
+              <m:mfenced separators="" open="|" close="|">
+                <m:msub>
+                  <m:mi>c</m:mi>
+                  <m:mi>k</m:mi>
+                </m:msub>
+              </m:mfenced>
+              <m:mn>2</m:mn>
+            </m:msup>
+            <m:mo>≤</m:mo>
+            <m:mi>B</m:mi>
+            <m:msubsup>
+              <m:mfenced open="∥" close="∥">
+                <m:mi>f</m:mi>
+              </m:mfenced>
+              <m:mn>2</m:mn>
+              <m:mn>2</m:mn>
+            </m:msubsup>
+            <m:mspace width="3.33333pt"/>
+            <m:mo>.</m:mo>
+          </m:mrow>
+        </m:math>
+      </equation>
+      <para id="id2254774">A Riesz basis is an orthogonal  basis if the <m:math><m:msub><m:mi>f</m:mi><m:mi>k</m:mi></m:msub></m:math> are mutually orthogonal. In this case, <m:math><m:mrow><m:mi>A</m:mi><m:mo>=</m:mo><m:mi>B</m:mi><m:mo>=</m:mo><m:mn>1</m:mn></m:mrow></m:math>.</para>
+   
+  </content>
+  <bib:file/>
+</document>
