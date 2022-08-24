@@ -1,12 +1,13 @@
-<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en" authors="Daniel Williamson">
   <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
     <md:content-id>col10566</md:content-id>
     <md:title>An Introduction to Wavelet Analysis </md:title>
     <md:language>en</md:language>
     <md:license url="http://creativecommons.org/licenses/by/2.0/">Creative Commons Attribution License</md:license>
     <md:uuid>936603d5-1550-4ae1-86b1-84c7c11b3be4</md:uuid>
-<md:slug>an-introduction-to-wavelet-analysis</md:slug>
-</metadata>
+    <md:slug>an-introduction-to-wavelet-analysis</md:slug>
+  </metadata>
   <col:content>
     <col:module document="m17393"/>
     <col:module document="m17392"/>
